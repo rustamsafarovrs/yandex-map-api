@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import ymaps from 'ymaps';
+import {YaEvent} from 'angular8-yandex-maps';
 
 @Component({
   selector: 'app-root',
@@ -7,33 +7,28 @@ import ymaps from 'ymaps';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  myMap;
-  yMaps;
+  point: number[];
+  center: number[] = [55.76, 37.64];
+  addressLine;
 
   ngOnInit(): void {
     this.init();
   }
 
   private init(): void {
-    ymaps
-      .load('https://api-maps.yandex.ru/2.1/?apikey=1fcd605d-9dde-4bf2-92be-540cc8637956&lang=ru_RU&load=Map')
-      .then(maps => {
-        this.myMap = new maps.Map('my-map', {
-          center: [55.751574, 37.573856],
-          zoom: 9
-        });
-        this.myMap.events.add('click', (e) => {
-          this.myMap.geoObjects.removeAll();
-          const coords = e.get('coords');
-          const clickedPlace = new maps.Placemark(coords);
-          maps.geocode(coords).then((res) => {
-            const firstGeoObject = res.geoObjects.get(0);
-            console.log(firstGeoObject.getAddressLine());
-          });
-          this.myMap.geoObjects.add(clickedPlace);
-        });
-      })
-      .catch(error => console.log('Failed to load Yandex Maps', error));
+    this.point = [55.847, 37.6];
   }
 
+  onYaClick($event: YaEvent<ymaps.Map>): void {
+    const coords = $event.event.get('coords');
+    this.point = [coords[0], coords[1]];
+  }
+
+  onYaActionEnd($event: YaEvent<ymaps.Map>): void {
+    this.point = $event.event.originalEvent.target.getCenter();
+    $event.ymaps.geocode(this.point).then((res: any) => {
+      const firstGeoObject = res.geoObjects.get(0);
+      this.addressLine = firstGeoObject.getAddressLine();
+    });
+  }
 }

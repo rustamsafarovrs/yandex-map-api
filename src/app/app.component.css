@@ -1,0 +1,9 @@
+.marker {
+  position: absolute;
+  /*left: 50%;*/
+  /*600 400*/
+  /*top: 50%;*/
+  z-index: 99999;
+  top: 200px;
+  left: 300px;
+}

@@ -19,9 +19,9 @@
     "@angular/platform-browser": "~11.2.11",
     "@angular/platform-browser-dynamic": "~11.2.11",
     "@angular/router": "~11.2.11",
+    "angular8-yandex-maps": "^12.1.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "ymaps": "^0.2.1",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
