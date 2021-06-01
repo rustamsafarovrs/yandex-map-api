@@ -37,7 +37,11 @@ export class AppComponent implements OnInit {
       provider: 'browser',
       mapStateAutoApply: true,
     }).then((res) => {
-      console.log(res.geoObjects.get(0).properties.get('metaDataProperty'));
+      this.center = res.geoObjects.get(0).geometry.getBounds()[0];
+      this.map.setCenter(this.center, 15,
+        // включаем масштабирование карты колесом
+        {duration: 2111})
+      ;
     })
       .catch(error => console.log('Yandex Map Error: ', error));
   }
