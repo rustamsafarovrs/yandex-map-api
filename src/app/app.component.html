@@ -1,5 +1,5 @@
 <div id="my-map" style="width: 600px; height: 400px;">
-  <ya-map [center]="center" (yaclick)="onYaClick($event)" (actionend)="onYaActionEnd($event)">
+  <ya-map [center]="center" (ready)="onMapReady($event)" (actionend)="onYaActionEnd($event)">
 
   </ya-map>
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="marker">
@@ -9,3 +9,4 @@
 </div>
 
 <div id="address">{{addressLine}}</div>
+<button (click)="onDetectLocationClick()">Detect location</button>
