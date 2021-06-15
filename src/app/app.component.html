@@ -10,3 +10,9 @@
 
 <div id="address">{{addressLine}}</div>
 <button (click)="onDetectLocationClick()">Detect location</button>
+<br>
+<select name="city" id="city" (change)="onCityChange($event)">
+  <option *ngFor="let item of cityCoordinates | keyvalue">
+    {{item.key}}
+  </option>
+</select>
